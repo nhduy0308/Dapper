@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Service
 {
-    public interface IEmployeeService : IService<Employee>
+    public interface IEmployeeService 
     {
     }
 

@@ -11,6 +11,7 @@ using System.Web.Http;
 using Data;
 using Model.Models;
 using WebAPI.Providers;
+using Microsoft.Owin.Security.Infrastructure;
 
 [assembly: OwinStartup(typeof(WebAPI.App_Start.Startup))]
 
@@ -45,6 +46,18 @@ namespace WebAPI.App_Start
             app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 
+            var OAuthBearerOptions = new OAuthBearerAuthenticationOptions()
+            {
+                Provider = new QueryStringOAuthBearerProvider(),
+                AccessTokenProvider = new AuthenticationTokenProvider()
+                {
+                    OnCreate = create,
+                    OnReceive = receive
+                },
+            };
+
+            app.UseOAuthBearerAuthentication(OAuthBearerOptions);
+
             // Branch the pipeline here for requests that start with "/signalr"
             app.Map("/signalr", map =>
             {
@@ -74,7 +87,6 @@ namespace WebAPI.App_Start
             });
 
         }
-
         private static UserManager<AspNetUser> CreateManager(IdentityFactoryOptions<UserManager<AspNetUser>> options, IOwinContext context)
         {
             var userStore = new UserStore<AspNetUser>(context.Get<DbContext>());
@@ -82,5 +94,15 @@ namespace WebAPI.App_Start
 
             return owinManager;
         }
+        private static Action<AuthenticationTokenCreateContext> create = new Action<AuthenticationTokenCreateContext>(c =>
+        {
+            c.SetToken(c.SerializeTicket());
+        });
+
+        private static Action<AuthenticationTokenReceiveContext> receive = new Action<AuthenticationTokenReceiveContext>(c =>
+        {
+            c.DeserializeTicket(c.Token);
+            //c.OwinContext.Environment["Properties"] = c.Ticket.Properties;
+        });
     }
 }

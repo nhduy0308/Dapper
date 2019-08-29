@@ -11,6 +11,7 @@ namespace Common.Enums
         Create,
         Read,
         Update,
-        Delete
+        Delete,
+        All
     }
 }

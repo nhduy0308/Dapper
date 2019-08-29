@@ -27,7 +27,6 @@ namespace WebAPI.App_Start
             ConfigAutofac(app);
             ConfigureAuth(app);
         }
-
         private void ConfigAutofac(IAppBuilder app)
         {
             var builder = new ContainerBuilder();
@@ -50,13 +49,9 @@ namespace WebAPI.App_Start
             builder.Register(c => app.GetDataProtectionProvider()).InstancePerRequest();
 
             // Services
-            builder.RegisterAssemblyTypes(typeof(ProductService).Assembly)
-               .Where(t => t.Name.EndsWith("Service"))
-               .AsImplementedInterfaces().InstancePerRequest();
 
             Autofac.IContainer container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
-
             GlobalConfiguration.Configuration.DependencyResolver = new AutofacWebApiDependencyResolver((IContainer)container); //Set the WebApi DependencyResolver
         }
     }

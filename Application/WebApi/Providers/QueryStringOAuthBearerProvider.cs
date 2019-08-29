@@ -7,7 +7,7 @@ namespace WebAPI.Providers
     {
         public override Task RequestToken(OAuthRequestTokenContext context)
         {
-            var value = context.Request.Query.Get("access_token");
+            var value = context.Request.Headers["access_token"];
 
             if (!string.IsNullOrEmpty(value))
             {

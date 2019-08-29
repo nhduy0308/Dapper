@@ -14,11 +14,9 @@ namespace WebApi.Controllers
             this._employeeService = employeeService;
         }
 
-        public IHttpActionResult Get([FromUri]EmployeeGetAllAction ActionCmd)
+        public IHttpActionResult Get()
         {
-            ActionCmd._employeeService = this._employeeService;
-            return Ok(ActionCmd.Execute());
-            
+            return Ok();
         }
         
     }

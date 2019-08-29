@@ -8,8 +8,8 @@ using System.Web;
 
 namespace WebApi.Models
 {
-    public class EmployeeViewModel : Employee
+    public class EmployeeViewModel
     {
-        
+        public string Name { get; set; }
     }
 }

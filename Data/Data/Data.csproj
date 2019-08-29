@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Dapper, Version=1.60.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Dapper.1.60.6\lib\net451\Dapper.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -54,6 +57,37 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dapper\Attributes\IdentityAttribute.cs" />
+    <Compile Include="Dapper\Attributes\IgnoreUpdateAttribute.cs" />
+    <Compile Include="Dapper\Attributes\Joins\InnerJoinAttribute.cs" />
+    <Compile Include="Dapper\Attributes\Joins\JoinAttributeBase.cs" />
+    <Compile Include="Dapper\Attributes\Joins\LeftJoinAttribute.cs" />
+    <Compile Include="Dapper\Attributes\Joins\RightJoinAttribute.cs" />
+    <Compile Include="Dapper\Attributes\LogicalDelete\DeletedAttribute.cs" />
+    <Compile Include="Dapper\Attributes\LogicalDelete\StatusAttribute.cs" />
+    <Compile Include="Dapper\Attributes\UpdatedAtAttribute.cs" />
+    <Compile Include="Dapper\DapperRepository.BulkUpdate.cs" />
+    <Compile Include="Dapper\DapperRepository.cs" />
+    <Compile Include="Dapper\DapperRepository.ExecuteJoinQuery.cs" />
+    <Compile Include="Dapper\DapperRepository.Find.cs" />
+    <Compile Include="Dapper\DapperRepository.Find.Join.cs" />
+    <Compile Include="Dapper\DapperRepository.FindById.cs" />
+    <Compile Include="Dapper\DapperRepository.FindById.Join.cs" />
+    <Compile Include="Dapper\DapperRepository.Insert.cs" />
+    <Compile Include="Dapper\DapperRepository.Update.cs" />
+    <Compile Include="Dapper\DbContext\DapperDbContext.cs" />
+    <Compile Include="Dapper\DbContext\IDapperDbContext.cs" />
+    <Compile Include="Dapper\Extensions\TypeExtensions.cs" />
+    <Compile Include="Dapper\IDapperRepository.cs" />
+    <Compile Include="Dapper\SqlGenerator\ESqlConnector.cs" />
+    <Compile Include="Dapper\SqlGenerator\ExpressionHelper.cs" />
+    <Compile Include="Dapper\SqlGenerator\ISqlGenerator.cs" />
+    <Compile Include="Dapper\SqlGenerator\QueryParameter.cs" />
+    <Compile Include="Dapper\SqlGenerator\SqlGenerator.cs" />
+    <Compile Include="Dapper\SqlGenerator\SqlGeneratorConfig.cs" />
+    <Compile Include="Dapper\SqlGenerator\SqlJoinPropertyMetadata.cs" />
+    <Compile Include="Dapper\SqlGenerator\SqlPropertyMetadata.cs" />
+    <Compile Include="Dapper\SqlGenerator\SqlQuery.cs" />
     <Compile Include="DbContext.cs" />
     <Compile Include="Infrastructure\DbFactory.cs" />
     <Compile Include="Infrastructure\Disposable.cs" />
@@ -78,11 +112,16 @@
     <Compile Include="Migrations\201908230636502_NewTableSaleAndSaleItem.Designer.cs">
       <DependentUpon>201908230636502_NewTableSaleAndSaleItem.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201908270329558_createUser.cs" />
+    <Compile Include="Migrations\201908270329558_createUser.Designer.cs">
+      <DependentUpon>201908270329558_createUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Dapper\bin\Debug\netstandard1.3\MicroOrm.Dapper.Repositories.deps.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -104,6 +143,18 @@
     <EmbeddedResource Include="Migrations\201908230636502_NewTableSaleAndSaleItem.resx">
       <DependentUpon>201908230636502_NewTableSaleAndSaleItem.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908270329558_createUser.resx">
+      <DependentUpon>201908270329558_createUser.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Dapper\bin\Debug\net45\Dapper.dll" />
+    <Content Include="Dapper\bin\Debug\net45\MicroOrm.Dapper.Repositories.dll" />
+    <Content Include="Dapper\bin\Debug\net45\MicroOrm.Dapper.Repositories.pdb" />
+    <Content Include="Dapper\bin\Debug\net45\MicroOrm.Dapper.Repositories.xml" />
+    <Content Include="Dapper\bin\Debug\netstandard1.3\MicroOrm.Dapper.Repositories.dll" />
+    <Content Include="Dapper\bin\Debug\netstandard1.3\MicroOrm.Dapper.Repositories.pdb" />
+    <Content Include="Dapper\bin\Debug\netstandard1.3\MicroOrm.Dapper.Repositories.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
